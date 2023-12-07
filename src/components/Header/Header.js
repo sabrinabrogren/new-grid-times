@@ -21,11 +21,15 @@ const Header = () => {
               <Menu size={24} />
             </button>
           </ActionGroup>
-          <ActionGroup>
+          <ActionGroupUser>
             <button>
               <User size={24} />
             </button>
-          </ActionGroup>
+          </ActionGroupUser>
+          <Subscribe>
+            <Button>Subscribe</Button>
+            <Link>Already a subscriber?</Link>
+          </Subscribe>
         </Row>
       </SuperHeader>
       <MainHeader>
@@ -39,6 +43,14 @@ const SuperHeader = styled.div`
   padding: 16px 0;
   background: var(--color-gray-900);
   color: white;
+  @media ${QUERIES.laptopAndUp} {
+    color: unset;
+    background: unset;
+    position: absolute;
+    right: 0;
+    left: 0;
+    padding-top: 0;
+  }
 `;
 
 const Row = styled(MaxWidthWrapper)`
@@ -59,12 +71,36 @@ const ActionGroup = styled.div`
   }
 `;
 
+const ActionGroupUser = styled(ActionGroup)`
+  @media ${QUERIES.laptopAndUp} {
+    display: none;
+  }
+`;
+
 const MainHeader = styled(MaxWidthWrapper)`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 32px;
   margin-bottom: 48px;
+`;
+
+const Subscribe = styled.div`
+  display: none;
+  @media ${QUERIES.laptopAndUp} {
+    display: flex;
+  }
+  padding-top: 24px;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+`;
+
+const Link = styled.a`
+  font-family: var(--font-family-serif);
+  font-size: (14 / 16) * 1rem;
+  font-style: italic;
+  text-decoration: underline;
 `;
 
 export default Header;
