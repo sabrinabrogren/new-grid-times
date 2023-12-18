@@ -12,7 +12,7 @@ import MainStory from '../MainStory';
 import SecondaryStory from '../SecondaryStory';
 import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
-import { COLORS } from '../../constants';
+import { COLORS, QUERIES } from '../../constants';
 
 const MainStoryGrid = () => {
   return (
@@ -33,11 +33,13 @@ const MainStoryGrid = () => {
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
+        <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
-            <OpinionStory key={story.id} {...story} />
+            <OpinionStoryWrapper>
+              <OpinionStory key={story.id} {...story} />
+            </OpinionStoryWrapper>
           ))}
-        </StoryList>
+        </OpinionStoryList>
       </OpinionSection>
 
       <AdvertisementSection>
@@ -56,6 +58,14 @@ const Wrapper = styled.div`
     'advertisement';
   gap: 48px;
   margin-bottom: 48px;
+  @media ${QUERIES.tabletOnly} {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'main-story main-story secondary-stories'
+      'advertisement advertisement advertisement'
+      'opinion-stories opinion-stories opinion-stories';
+  }
 `;
 
 const MainStorySection = styled.section`
@@ -72,14 +82,36 @@ const StoryList = styled.div`
 `;
 
 const SecondaryStoryWrapper = styled.div`
-  padding: 16px 0;
+  :not(:first-child) {
+    padding-top: 16px
+  }
   :not(:last-child) {
     border-bottom: 1px solid ${COLORS.gray[300]};
+    padding-bottom: 16px;
   }
 `;
 
 const OpinionSection = styled.section`
   grid-area: opinion-stories;
+`;
+
+const OpinionStoryList = styled.div`
+  @media ${QUERIES.tabletOnly} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 32px;
+  }
+`;
+
+const OpinionStoryWrapper = styled.div`
+  padding: 16px 0;
+  :not(:last-child) {
+    border-bottom: 1px solid ${COLORS.gray[300]};
+  }
+  @media ${QUERIES.tabletOnly} {
+    border: none !important;
+    
+  }
 `;
 
 const AdvertisementSection = styled.section`

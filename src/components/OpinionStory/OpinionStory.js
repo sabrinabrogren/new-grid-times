@@ -21,6 +21,7 @@ const Wrapper = styled.article`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  gap: 12px;
   @media ${QUERIES.tabletOnly} {
     display: block;
   }
